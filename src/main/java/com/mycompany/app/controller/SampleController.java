@@ -45,11 +45,17 @@ public class SampleController {
         return catRepo.findAll().toString();
     }
 
+    /**
+     * Method needed to be public.
+     * @return
+     */
     @Transactional
     @PostMapping("/")
     @ResponseBody
-    String home1() {
-        Cat wow = new Cat("wow", 12, new Person("Rick" + LocalDateTime.now()));
+    public String home1() {
+        Person owner = new Person("Rick" + LocalDateTime.now());
+        em.persist(owner);
+        Cat    wow   = new Cat("wow", 12, owner);
         em.persist(wow);
         return wow.toString();
     }
